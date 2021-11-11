@@ -1,5 +1,5 @@
 import express from 'express';
-import HackerNewsService from '../services/hackernewsservice.js';
+import HackerNewsService from '../services/api/hackernewsservice.js';
 import { validateParams } from './middlewares/hackernews.js';
 
 const router = express.Router();

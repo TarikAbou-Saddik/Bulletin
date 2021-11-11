@@ -2,10 +2,11 @@ import { ReactNode } from 'react';
 import { Image, LogoHeading, LogoSize } from './styles';
 import { FlexCenter } from '../../styles/shared/Flex';
 import { IconType, IconBaseProps } from 'react-icons';
+import { fetchLogo } from '../../services/iconservice';
 
 // TODO: Fix naming of fontSize and other props.
 type LogoProps = {
-  logo: string | IconType;
+  logo?: string | IconType;
   icon?: boolean;
   children?: ReactNode;
   fontSize?: LogoSize;
@@ -24,7 +25,7 @@ const Logo = ({
 }: LogoProps) => {
   const loadImage = () => {
     if (icon) {
-      const Icon = logo as IconType;
+      const Icon = fetchLogo(logo) as IconType;
       return <Icon size={logoSize} color={color} />;
     }
     const imageSrc = logo as string;

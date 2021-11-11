@@ -1,5 +1,7 @@
+import EmptyState from '../components/EmptyState';
+
 const Blogs = () => {
-  return <h1>Hello World!</h1>;
+  return <EmptyState />;
 };
 
 export default Blogs;

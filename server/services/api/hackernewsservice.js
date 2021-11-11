@@ -1,7 +1,7 @@
-import BaseService from './baseservice.js';
-import config from '../config/index.js';
+import BaseApiService from './baseservice.js';
+import config from '../../config/index.js';
 
-export default class HackerNewsService extends BaseService {
+export default class HackerNewsApiService extends BaseApiService {
   constructor() {
     super('HackerNewsService', config.hackernews.apiUrl);
     this.itemType = {
@@ -18,7 +18,7 @@ export default class HackerNewsService extends BaseService {
     const response = await this.createRequest(`${this.apiUrl}/${path}.json`);
     const ids = await response.json();
     const stories = await this.getResourcesByIds('item', ids.slice(0, count));
-    return this.parseStoryResponse(stories);
+    return this.parseStoryResponse(stories, path);
   }
 
   // Users
@@ -58,8 +58,7 @@ export default class HackerNewsService extends BaseService {
     return await response.json();
   }
 
-  parseStoryResponse(stories) {
-    console.log(stories);
+  parseStoryResponse(stories, category) {
     const posts = stories.map(story => {
       return {
         points: story.score,
@@ -74,6 +73,8 @@ export default class HackerNewsService extends BaseService {
       };
     });
     return {
+      name: 'HackerNews',
+      category,
       logo: {
         iconSrc: 'FaHackerNews',
         title: 'Hacker News',

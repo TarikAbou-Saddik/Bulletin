@@ -16,6 +16,8 @@ export interface IBlogPost {
 }
 
 export interface IBlogApiResponse {
+  name: string;
+  category: string;
   description: string;
   logo: IBlogLogo;
   posts: IBlogPost[];
